@@ -1,0 +1,7 @@
+# Obsidian workspace state
+.obsidian/workspace*.json
+example-vault/.obsidian/workspace*.json
+example-vault/.obsidian/cache
+# OS files
+.DS_Store
+Thumbs.db

@@ -16,11 +16,11 @@
 | Part | What it does |
 |---|---|
 | **Character sheet plugin** (`cpr-character-sheet`) | STATs, skills with d10 rolls (crit/fumble), HP with Seriously or Mortally Wounded penalties, Death Save, armor ablation, weapons and ammo, cyberware, gear, lifepath, a roll log, a **character creation wizard**, **IP upgrades**, **homebrew** item, enemy, NPC, role and skill forms, and a **phone layout**. All data lives in the note's properties. |
-| **CSS snippet** `cyberpunk-red-cards.css` | Styles the NPC and enemy statblocks, the item cards and the home page. |
+| **CSS snippet** [`snippets/cyberpunk-red-cards.css`](snippets/cyberpunk-red-cards.css) | Styles the NPC and enemy statblocks, the item cards and the home page. |
 | **Item card script** `cpr-item-card/view.js` | Dataview script that draws a card from an item note's properties. |
 | **Fantasy Statblocks layout** `CPR Character` | Layout for NPCs and enemies. |
 | **Templater templates** | `CPR NPC` and `CPR Item`. |
-| **Home page** `Úvod.md` | A Bases dashboard with crew cards (HP, SP, conditions), NPCs, enemies, items and conditions, plus Meta Bind buttons. |
+| **Home page** `Home.md` | A Bases dashboard with crew cards (HP, SP, conditions), NPCs, enemies, items and conditions, plus Meta Bind buttons. |
 | **Example vault** | A ready folder structure with *original* example content: one character, enemy, NPC, item and condition. |
 
 ## Required community plugins
@@ -30,18 +30,18 @@
 - **Fantasy Statblocks**
 - **Meta Bind** (home page buttons)
 - **Initiative Tracker / Roll for Initiative**: optional. The note properties (`hp`, `hp_current`, `ref`, `sp_head`, `sp_body`, `conditions`, `type`) are compatible with it.
-- **Homepage**: optional, to open `Úvod.md` on start.
+- **Homepage**: optional, to open `Home.md` on start.
 - **Bases**: core plugin, needs Obsidian 1.9 or newer.
 
 ## Quick start (the easiest way)
 
-1. Copy the whole `example-vault` folder somewhere and open it in Obsidian as a vault. Its `.obsidian` folder is hidden on most systems, so copy it too.
+1. Copy the whole `example-vault` folder somewhere and open it in Obsidian as a vault. Its `.obsidian` folder is hidden on most systems, so copy it too. (If you downloaded the repository as a ZIP, `.obsidian` is included.)
    Then put `main.js`, `manifest.json` and `styles.css` (from the latest **Release**, or the repository root) into `example-vault/.obsidian/plugins/cpr-character-sheet/`.
 2. Turn off Restricted mode and install the plugins listed above.
 3. **Settings → Community plugins** → enable **Edgerunner Character Sheet**.
-4. **Settings → Appearance → CSS snippets** → enable `cyberpunk-red-cards`.
+4. **Settings → Appearance → CSS snippets** → enable `cyberpunk-red-cards`. The file is already in `example-vault/.obsidian/snippets/`. It is also in the [`snippets/`](snippets/) folder of this repository.
 5. **Fantasy Statblocks → Layouts → Import From JSON** → `config/fantasy-statblocks-layout-CPR-Character.json`. Keep the name `CPR Character`.
-6. **Templater** → *Template folder location* = `0. Kompendium/_templates`.
+6. **Templater** → *Template folder location* = `0. Compendium/_templates`.
 7. **Meta Bind** → *Button templates*: add the four buttons from `config/meta-bind-buttons.json`. Alternatively, close Obsidian and paste the `buttonTemplates` array into `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`.
 8. Optional: in Roll for Initiative use the folders from `config/roll-for-initiative-settings.json`.
 
@@ -49,31 +49,34 @@
 
 - Plugin: download `main.js`, `manifest.json` and `styles.css` from the latest **Release** into `<vault>/.obsidian/plugins/cpr-character-sheet/`.
   Alternatively, install it with the **BRAT** plugin: *Add beta plugin* → paste this repository's URL.
-- Snippet: copy `example-vault/.obsidian/snippets/cyberpunk-red-cards.css` to `<vault>/.obsidian/snippets/`.
-- Script: copy `example-vault/0. Kompendium/_scripts/cpr-item-card/` anywhere in the vault. Dataview finds it by the path ending `_scripts/cpr-item-card`.
+- Snippet: download [`snippets/cyberpunk-red-cards.css`](snippets/cyberpunk-red-cards.css) into `<vault>/.obsidian/snippets/`, then enable it in **Settings → Appearance → CSS snippets** (press the reload icon if it doesn't show up).
+- Script: copy `example-vault/0. Compendium/_scripts/cpr-item-card/` anywhere in the vault. Dataview finds it by the path ending `_scripts/cpr-item-card`.
 - In **Settings → Edgerunner Character Sheet**, set your folders for characters, enemies, NPCs and items.
 
 ### Default folder structure
 
 ```
-0. Kompendium/_scripts, _templates
-1. Pravidla/Stavy        conditions
-2. Hráči                 player characters
-3. Nepřátelé             enemies (type: monster)
-4. Předměty              items (homebrew items are sorted into subfolders)
-5. NPC                   friendly NPCs (type: npc)
-Úvod.md                  home page
+0. Compendium/_scripts, _templates
+1. Rules/Conditions      conditions
+2. Characters            player characters (portraits in 2. Characters/Portraits)
+3. Enemies               enemies (type: monster)
+4. Items                 items. Homebrew items are sorted into subfolders:
+                         Weapons/{Ranged,Melee,Exotic} Weapons, Weapons/Ammo,
+                         Weapons/Attachments, Armor, Cyberware/<type>, Gear,
+                         Drugs, Netrunning/Programs, Netrunning/Hardware
+5. NPCs                  friendly NPCs (type: npc)
+Home.md                  home page
 ```
 
 ## Releasing a new version
 
 1. Raise `version` in `manifest.json` and add it to `versions.json`.
-2. Commit, then push a tag with the same number, e.g. `git tag 1.0.1 && git push origin 1.0.1`.
+2. Commit, then push a tag with the same number, e.g. `git tag 1.0.2 && git push origin 1.0.2`.
 3. The GitHub Action creates the release with `main.js`, `manifest.json` and `styles.css`, plus a build attestation.
 
 ## Using the sheet
 
-- **New character**: the ribbon icon on the left, the *+ Přidat Hráče* button on the home page, or the command *New character (wizard)*. Pick a Role and a method (Streetrat, Edgerunner or Complete Package), roll the Lifepath, STATs, skills, gear and cyberware, then review.
+- **New character**: the ribbon icon on the left, the *+ New Character* button on the home page, or the command *New character (wizard)*. Pick a Role and a method (Streetrat, Edgerunner or Complete Package), roll the Lifepath, STATs, skills, gear and cyberware, then review.
 - **Edit sheet** turns on editing. Values can also be changed in the note properties.
 - **Damage**: type the damage and press BODY HIT or HEAD HIT. Armor stops what it can and loses 1 SP. Wound penalties apply automatically.
 - **Upgrade** (next to IP): spend Improvement Points on skills and Rank.
@@ -82,7 +85,7 @@
 
 ## Your own content
 
-Your item, condition and enemy notes come from your own book. The policy above doesn't let fans republish stat blocks or rules text, so don't commit those notes to a public fork. The `.gitignore` here ignores the content folders by default except for the examples.
+Your item, condition and enemy notes come from your own book. The policy above doesn't let fans republish stat blocks or rules text, so don't commit those notes to a public fork.
 
 ## Privacy & permissions
 

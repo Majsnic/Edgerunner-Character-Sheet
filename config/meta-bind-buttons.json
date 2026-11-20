@@ -1,10 +1,10 @@
 {
   "buttonTemplates": [
     {
-      "label": "+ Přidat Hráče",
+      "label": "+ New Character",
       "hidden": true,
       "class": "callButton",
-      "tooltip": "Průvodce tvorbou postavy",
+      "tooltip": "Character creation wizard",
       "id": "pc",
       "style": "primary",
       "actions": [
@@ -16,7 +16,7 @@
       "icon": ""
     },
     {
-      "label": "+ Přidat NPC",
+      "label": "+ New NPC",
       "hidden": true,
       "class": "callButton",
       "tooltip": "",
@@ -31,7 +31,7 @@
       "icon": ""
     },
     {
-      "label": "+ Přidat Nepřítele",
+      "label": "+ New Enemy",
       "hidden": true,
       "class": "callButton",
       "tooltip": "",
@@ -46,7 +46,7 @@
       "icon": ""
     },
     {
-      "label": "+ Přidat Předmět",
+      "label": "+ New Item",
       "hidden": true,
       "class": "callButton",
       "tooltip": "",

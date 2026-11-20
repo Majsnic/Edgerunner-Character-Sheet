@@ -37,10 +37,10 @@ const LIFEPATH_FIELDS = [
 
 const MOBILE_PAGES = [["overview", "Overview"], ["skills", "Skills"], ["combat", "Combat"], ["dossier", "Dossier"]];
 const DEFAULT_SETTINGS = {
-  characterFolder: "2. Hráči",
-  itemFolder: "4. Předměty",
-  enemyFolder: "3. Nepřátelé",
-  npcFolder: "5. NPC",
+  characterFolder: "2. Characters",
+  itemFolder: "4. Items",
+  enemyFolder: "3. Enemies",
+  npcFolder: "5. NPCs",
   autoWoundPenalty: true,
   homebrewRoles: [],   // [{name, ability, desc}]
   homebrewSkills: [],  // [{name, stat, x2}]
@@ -1445,10 +1445,10 @@ class UpgradeModal extends Modal {
 const HB_TIERS = [[10, "Cheap"], [20, "Everyday"], [50, "Costly"], [100, "Premium"], [500, "Expensive"], [1000, "Very Expensive"], [5000, "Luxury"], [Infinity, "Super Luxury"]];
 const hbTier = (cost) => (HB_TIERS.find(([lim]) => cost <= lim) || [0, ""])[1];
 const HB_CATS = {
-  Weapon: "Zbraně", Armor: "Zbroj", Ammo: "Zbraně/Munice", Attachment: "Zbraně/Doplňky zbraní",
-  Cyberware: "Cyberware", Gear: "Vybavení", Drug: "Drogy", Program: "Netrunning/Programy", Hardware: "Netrunning/Hardware",
+  Weapon: "Weapons", Armor: "Armor", Ammo: "Weapons/Ammo", Attachment: "Weapons/Attachments",
+  Cyberware: "Cyberware", Gear: "Gear", Drug: "Drugs", Program: "Netrunning/Programs", Hardware: "Netrunning/Hardware",
 };
-const HB_WEAPON_KIND = { Ranged: "Střelné zbraně", Melee: "Chladné zbraně", Exotic: "Exotické zbraně" };
+const HB_WEAPON_KIND = { Ranged: "Ranged Weapons", Melee: "Melee Weapons", Exotic: "Exotic Weapons" };
 const HB_CYBER_TYPES = ["Fashionware", "Neuralware", "Chipware", "Cyberoptics", "Cyberaudio", "Internal Body", "External Body", "Cyberlimbs", "Borgware"];
 const HB_HL = [["0", "0 (none)"], ["1d6/2 (2)", "1d6/2 (2)"], ["1d6 (3)", "1d6 (3)"], ["2d6 (7)", "2d6 (7)"], ["3d6 (10)", "3d6 (10)"], ["4d6 (14)", "4d6 (14)"]];
 const HB_PROGRAM_CLASSES = ["Booster", "Defender", "Anti-Program Attacker", "Anti-Personnel Attacker", "Anti-Personnel Black ICE", "Anti-Program Black ICE"];
@@ -1560,8 +1560,8 @@ class HomebrewItemModal extends HbForm {
     this.draw();
   }
   folder() {
-    const d = this.d, root = this.plugin.settings.itemFolder || "4. Předměty";
-    if (d.category === "Weapon") return `${root}/Zbraně/${HB_WEAPON_KIND[d.kind]}`;
+    const d = this.d, root = this.plugin.settings.itemFolder || "4. Items";
+    if (d.category === "Weapon") return `${root}/Weapons/${HB_WEAPON_KIND[d.kind]}`;
     if (d.category === "Cyberware") return `${root}/Cyberware/${d.cyberType}`;
     if (d.category === "Program") return `${root}/Netrunning/${/Black ICE/.test(d.pclass) ? "Black ICE" : "Programy"}`;
     return `${root}/${HB_CATS[d.category]}`;
@@ -1761,7 +1761,7 @@ class HomebrewEnemyModal extends HbForm {
     this.input(this.row(c, "Loot"), d.loot, "50eb, Heavy Pistol", "text", (v) => (d.loot = v));
 
     const foot = el(c, "div", "cpr-edit-bar");
-    el(foot, "span", "cpr-sub", `→ ${d.threat === "NPC" ? this.plugin.settings.npcFolder || "5. NPC" : this.plugin.settings.enemyFolder || "3. Nepřátelé"}`);
+    el(foot, "span", "cpr-sub", `→ ${d.threat === "NPC" ? this.plugin.settings.npcFolder || "5. NPCs" : this.plugin.settings.enemyFolder || "3. Enemies"}`);
     const go = el(foot, "button", "mod-cta", d.threat === "NPC" ? "Create NPC" : "Create enemy");
     go.onclick = () => this.create();
   }
@@ -1808,7 +1808,7 @@ class HomebrewEnemyModal extends HbForm {
     if (sb.tactics) lines.push(`tactics: ${yamlStr(sb.tactics)}`);
     if (sb.loot) lines.push(`loot: ${yamlStr(sb.loot)}`);
     const text = `---\n${hbYaml(fm)}\n---\n\n\`\`\`statblock\n${lines.join("\n")}\n\`\`\`\n\n## Notes\n- \n`;
-    const folder = isNpc ? this.plugin.settings.npcFolder || "5. NPC" : this.plugin.settings.enemyFolder || "3. Nepřátelé";
+    const folder = isNpc ? this.plugin.settings.npcFolder || "5. NPCs" : this.plugin.settings.enemyFolder || "3. Enemies";
     const file = await hbCreateNote(this.app, folder, d.name, text);
     if (file) this.close();
   }
@@ -2717,7 +2717,7 @@ class CprSettingTab extends PluginSettingTab {
 
     c.createEl("h3", { text: "Folders" });
     this.folderSetting(c, "characterFolder", "New character folder", "Where the character wizard puts new sheets.");
-    this.folderSetting(c, "itemFolder", "Item library folder", "Root of your item notes. Homebrew items are filed into its subfolders (Zbraně, Zbroj, Cyberware/…, Netrunning/…).");
+    this.folderSetting(c, "itemFolder", "Item library folder", "Root of your item notes. Homebrew items are filed into its subfolders (Weapons, Armor, Cyberware/…, Netrunning/…).");
     this.folderSetting(c, "enemyFolder", "Enemy folder", "Where new homebrew enemies go.");
     this.folderSetting(c, "npcFolder", "NPC folder", "Where new homebrew NPCs go.");
 
