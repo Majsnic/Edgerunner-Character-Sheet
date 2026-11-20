@@ -1,0 +1,296 @@
+/* ==========================================================
+   Cyberpunk RED cards for Obsidian
+   - NPC / enemy statblocks  (Fantasy Statblocks layout "CPR Character")
+   - Item notes              (cssclasses: cpr-item + item card script)
+   Put this file in:  <vault>/.obsidian/snippets/
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --cpr-bg: #0e1014;
+  --cpr-panel: #161a20;
+  --cpr-line: #2a3039;
+  --cpr-red: #ff2a3d;
+  --cpr-cyan: #19e3f0;
+  --cpr-yellow: #f5e000;
+  --cpr-text: #e6e8ec;
+  --cpr-dim: #8b93a1;
+  --cpr-head: "Chakra Petch", "Bahnschrift", "Segoe UI", sans-serif;
+  --cpr-body: "Rajdhani", "Bahnschrift", "Segoe UI", sans-serif;
+  --cpr-mono: "Share Tech Mono", Consolas, monospace;
+  --cpr-hazard: repeating-linear-gradient(-45deg, var(--cpr-yellow) 0 10px, #111 10px 20px);
+  --cpr-cut: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+/* ---------------- NPC / ENEMY STATBLOCK ---------------- */
+
+.statblock.cpr-character {
+  font-family: var(--cpr-body);
+}
+.cpr-character .statblock-content {
+  clip-path: var(--cpr-cut);
+  border-left: 4px solid var(--cpr-red);
+  background:
+    linear-gradient(180deg, rgba(255,42,61,.08), transparent 120px),
+    var(--cpr-bg);
+}
+
+/* top & bottom bars become hazard stripes */
+.cpr-character .bar {
+  height: 7px !important;
+  background: var(--cpr-hazard) !important;
+  border: none !important;
+}
+
+/* name */
+.cpr-character .statblock-heading {
+  font-family: var(--cpr-head);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,42,61,.55);
+  margin-bottom: 0;
+}
+
+/* threat // role line */
+.cpr-character .subheading {
+  font-family: var(--cpr-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--cpr-yellow);
+}
+
+/* section headings: WEAPONS, CYBERWARE ... */
+.cpr-character .section-header {
+  font-family: var(--cpr-head);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--cpr-bg) !important;
+  background: var(--cpr-red);
+  padding: 1px 10px;
+  border-bottom: none !important;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  width: fit-content;
+  min-width: 45%;
+}
+
+/* rules (horizontal lines) */
+.cpr-character .tapered-rule {
+  height: 2px !important;
+  background: linear-gradient(90deg, var(--cpr-red), transparent) !important;
+  clip-path: none !important;
+}
+
+/* STAT grid: 10 boxes */
+.cpr-character .statblock-table {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  margin: .4em 0;
+}
+.cpr-character .statblock-table .table-item {
+  background: var(--cpr-panel);
+  border: 1px solid var(--cpr-line);
+  border-top: 2px solid var(--cpr-cyan);
+  text-align: center;
+  padding: 2px 0 4px;
+  display: flex;
+  flex-direction: column;
+}
+.cpr-character .statblock-table-header {
+  font-family: var(--cpr-mono);
+  font-size: 11px;
+  color: var(--cpr-cyan);
+  letter-spacing: .1em;
+}
+.cpr-character .statblock-table .table-item > span:not(.statblock-table-header) {
+  font-family: var(--cpr-head);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* property names (HP, Skills...) */
+.cpr-character .property-name {
+  font-family: var(--cpr-mono);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--cpr-cyan);
+  font-size: .85em;
+}
+
+/* HP / Seriously Wounded / Death Save as three boxes */
+.cpr-character .cpr-vitals,
+.cpr-character .cpr-armor {
+  display: flex;
+  gap: 4px;
+  margin: 3px 0;
+}
+.cpr-character .cpr-vitals > .statblock-inline-item,
+.cpr-character .cpr-armor > .statblock-inline-item { flex: 1; }
+/* hide empty boxes (e.g. no Initiative given) */
+.cpr-character .statblock-inline-item:not(:has(.line)) { display: none; }
+.cpr-character .cpr-vitals .line,
+.cpr-character .cpr-armor .line {
+  height: 100%;
+  background: var(--cpr-panel);
+  border: 1px solid var(--cpr-line);
+  padding: 2px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.cpr-character .cpr-vitals .line {
+  border-left: 3px solid var(--cpr-red);
+}
+.cpr-character .cpr-vitals .line > :last-child,
+.cpr-character .cpr-armor .line > :last-child {
+  font-family: var(--cpr-head);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.cpr-character .cpr-armor .line {
+  border-left: 3px solid var(--cpr-yellow);
+}
+
+/* weapons / cyberware / abilities entries */
+.cpr-character .trait-name {
+  font-family: var(--cpr-head);
+  text-transform: uppercase;
+  color: var(--cpr-yellow) !important;
+}
+.cpr-character .statblock-trait-prop {
+  border-left: 1px dashed var(--cpr-line);
+  padding-left: 8px;
+  margin: 3px 0;
+}
+
+/* image as a framed portrait */
+.cpr-character .image img {
+  object-fit: cover;
+  clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%);
+  border-radius: 0 !important;
+}
+
+.cpr-character a { color: var(--cpr-cyan); }
+
+
+/* ---------------- ITEM NOTES ---------------- */
+
+/* hide the raw property table in reading view (still editable in edit view) */
+.markdown-preview-view.cpr-item .metadata-container,
+.markdown-reading-view .cpr-item .metadata-container { display: none; }
+
+.cpr-card {
+  --cpr-accent: var(--cpr-cyan);
+  position: relative;
+  max-width: 560px;
+  margin: 0 0 1.2em;
+  background: var(--cpr-bg);
+  color: var(--cpr-text);
+  font-family: var(--cpr-body);
+  font-size: 15px;
+  clip-path: var(--cpr-cut);
+  border-left: 4px solid var(--cpr-accent);
+  box-shadow: 0 0 18px rgba(255,42,61,.15);
+}
+.cpr-card[data-category="weapon"]    { --cpr-accent: var(--cpr-red); }
+.cpr-card[data-category="armor"]     { --cpr-accent: var(--cpr-yellow); }
+.cpr-card[data-category="cyberware"] { --cpr-accent: var(--cpr-cyan); }
+.cpr-card[data-category="gear"],
+.cpr-card[data-category="drug"]      { --cpr-accent: #b26bff; }
+.cpr-card[data-category="program"],
+.cpr-card[data-category="hardware"]  { --cpr-accent: #3df28a; }
+.cpr-card[data-category="ammo"],
+.cpr-card[data-category="attachment"] { --cpr-accent: #ff8a1f; }
+.cpr-card[data-category="condition"] { --cpr-accent: #ff2a3d; }
+.cpr-card__value { overflow-wrap: anywhere; }
+
+.cpr-card__stripe { height: 7px; background: var(--cpr-hazard); }
+.cpr-card__body { padding: 10px 16px 14px; }
+
+.cpr-card__tag {
+  font-family: var(--cpr-mono);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cpr-yellow);
+}
+.cpr-card__name {
+  font-family: var(--cpr-head) !important;
+  font-size: 26px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #fff !important;
+  margin: 0 0 6px !important;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--cpr-accent) 60%, transparent);
+  border: none !important;
+}
+
+.cpr-card__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 4px;
+  margin: 8px 0;
+}
+.cpr-card__cell {
+  background: var(--cpr-panel);
+  border: 1px solid var(--cpr-line);
+  border-top: 2px solid var(--cpr-accent);
+  padding: 3px 8px 5px;
+}
+.cpr-card__label {
+  display: block;
+  font-family: var(--cpr-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cpr-accent);
+}
+.cpr-card__value {
+  font-family: var(--cpr-head);
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cpr-card__section {
+  font-family: var(--cpr-head);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 13px;
+  color: var(--cpr-bg);
+  background: var(--cpr-accent);
+  width: fit-content;
+  padding: 0 10px;
+  margin-top: 10px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+.cpr-card__effects { margin: 6px 0 0; padding-left: 1.1em; }
+.cpr-card__effects li::marker { color: var(--cpr-accent); content: "▸ "; }
+
+.cpr-card__foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-family: var(--cpr-mono);
+  font-size: 11px;
+  color: var(--cpr-dim);
+  letter-spacing: .12em;
+}
+
+/* ---------------- HOME PAGE (cssclasses: cpr-home) ---------------- */
+.cpr-home .inline-title { display: none; }
+.cpr-home .cpr-home-head {
+  font-family: var(--cpr-head);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #fff;
+  background: var(--cpr-red);
+  padding: 2px 34px 2px 14px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+}
+.cpr-home h1 { border-bottom: 2px solid var(--cpr-red); padding-bottom: 6px; }

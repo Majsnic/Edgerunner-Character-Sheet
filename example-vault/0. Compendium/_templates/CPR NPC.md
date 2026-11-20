@@ -19,7 +19,7 @@ const s = presets[threat] ?? presets["Mook"];
 const ref = s[1], dex = s[2], will = s[5], body = s[8];
 const hp = 10 + 5 * Math.ceil((body + will) / 2);
 const type = threat === "NPC" ? "npc" : "monster";
-const folder = threat === "NPC" ? "5. NPC" : "3. Nepřátelé";
+const folder = threat === "NPC" ? "5. NPCs" : "3. Enemies";
 await tp.file.move(folder + "/" + (name || tp.file.title));
 -%>
 ---

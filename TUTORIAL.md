@@ -4,7 +4,7 @@ A short tour of **Edgerunner Character Sheet**. The numbers in each picture matc
 
 ## Creating a character
 
-Open the wizard with the ribbon icon on the left bar, the **+ Přidat Hráče** button on the home page, or the command **Edgerunner Character Sheet: New character (wizard)**.
+Open the wizard with the ribbon icon on the left bar, the **+ New Character** button on the home page, or the command **Edgerunner Character Sheet: New character (wizard)**.
 
 ### 1 · Role and method
 ![Role](docs/tutorial/01-wizard-role.png)

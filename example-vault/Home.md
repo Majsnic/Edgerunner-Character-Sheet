@@ -20,7 +20,7 @@ views:
     name: Crew
     filters:
       and:
-        - file.inFolder("2. Hráči")
+        - file.inFolder("2. Characters")
         - file.hasTag("Player")
     order:
       - file.name
@@ -33,10 +33,10 @@ views:
     imageFit: contain
     cardSize: 230
   - type: table
-    name: Přehled
+    name: Overview
     filters:
       and:
-        - file.inFolder("2. Hráči")
+        - file.inFolder("2. Characters")
         - file.hasTag("Player")
     order:
       - file.name
@@ -64,7 +64,7 @@ views:
     name: NPC
     filters:
       and:
-        - file.inFolder("5. NPC")
+        - file.inFolder("5. NPCs")
         - type == "npc"
     order:
       - file.name
@@ -77,16 +77,16 @@ views:
 
 <div style="height: 30px;"></div>
 
-> [!danger]- Nepřátelé
+> [!danger]- Enemies
 > `BUTTON[enemy]`
 >
 > ```base
 > views:
 >   - type: table
->     name: Nepřátelé
+>     name: Enemies
 >     filters:
 >       and:
->         - file.inFolder("3. Nepřátelé")
+>         - file.inFolder("3. Enemies")
 >         - type == "monster"
 >     order:
 >       - file.name
@@ -101,16 +101,16 @@ views:
 >         direction: ASC
 > ```
 
-> [!example]- Předměty
+> [!example]- Items
 > `BUTTON[item]`
 >
 > ```base
 > views:
 >   - type: table
->     name: Vše
+>     name: All
 >     filters:
 >       and:
->         - file.inFolder("4. Předměty")
+>         - file.inFolder("4. Items")
 >     order:
 >       - file.name
 >       - category
@@ -124,11 +124,11 @@ views:
 >       direction: ASC
 > ```
 
-> [!warning]- Stavy
+> [!warning]- Conditions
 > ```base
 > views:
 >   - type: table
->     name: Stavy
+>     name: Conditions
 >     filters:
 >       and:
 >         - type == "condition"

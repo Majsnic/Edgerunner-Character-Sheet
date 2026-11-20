@@ -5,8 +5,8 @@ const category = await tp.system.suggester(
   ["Weapon", "Armor", "Cyberware", "Gear", "Drug", "Program"],
   ["Weapon", "Armor", "Cyberware", "Gear", "Drug", "Program"]
 );
-const sub = {"Weapon": "Zbraně", "Armor": "Zbroj", "Cyberware": "Cyberware", "Gear": "Vybavení", "Drug": "Drogy", "Program": "Netrunning/Programy"}[category] ?? "";
-await tp.file.move("4. Předměty/" + (sub ? sub + "/" : "") + (name || tp.file.title));
+const sub = {"Weapon": "Weapons", "Armor": "Armor", "Cyberware": "Cyberware", "Gear": "Gear", "Drug": "Drugs", "Program": "Netrunning/Programs"}[category] ?? "";
+await tp.file.move("4. Items/" + (sub ? sub + "/" : "") + (name || tp.file.title));
 
 // extra properties per category (only these show up on the card)
 const extra = {
